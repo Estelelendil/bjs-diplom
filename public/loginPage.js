@@ -1,6 +1,5 @@
 'use strict'
 let obj = new UserForm;
-// console.log(obj)
 
 obj.loginFormCallback = function(data){
     console.log(data)
@@ -12,10 +11,8 @@ obj.loginFormCallback = function(data){
         else{
             location.reload();
         }
-    })
-    
+    })   
 }
-
 obj.registerFormCallback = function(data) {
     ApiConnector.register(data, response => {
         console.log(response)
