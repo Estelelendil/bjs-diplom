@@ -46,7 +46,7 @@ setInterval(getStocks, 60000)
      if(moneyRequest.success == true){
         ProfileWidget.showProfile(moneyRequest.data)// ? правильно ли обращаться к ProfileWidget?
      }
-     this.setMessage(moneyRequest.success)// выводим сообщение из полученных данных
+     money.setMessage(moneyRequest.success, moneyRequest.error || "Операция успешно выполнена")// выводим сообщение из полученных данных
         })
  }
  
@@ -56,7 +56,7 @@ setInterval(getStocks, 60000)
          if(convert.success == true){
             ProfileWidget.showProfile(convert.data)
          }
-         this.setMessage(convert.success)
+         money.setMessage(convert.success, convert.error || "Операция успешно выполнена")
      })
  }
 
@@ -66,7 +66,7 @@ setInterval(getStocks, 60000)
          if(trans.success == true){
             ProfileWidget.showProfile(trans.data)
          }
-         this.setMessage(trans.success)
+         money.setMessage(trans.success, trans.error || "Операция успешно выполнена")
      })
  }
 
@@ -77,8 +77,8 @@ setInterval(getStocks, 60000)
  ApiConnector.getFavorites(favor => {
      console.log(favor)
      if(favor.success == true){
-         rateBoard.clearTable()
-         rateBoard.fillTable(favor.data)
+         favorList.clearTable()
+         favorList.fillTable(favor.data)
          money.updateUsersList(favor.data)
      }
  })
@@ -87,19 +87,19 @@ setInterval(getStocks, 60000)
      ApiConnector.addUserToFavorites(data, add =>{
          console.log(add)
          if(add.success == true){
-            rateBoard.clearTable()
-            rateBoard.fillTable(add.data)
+            favorList.clearTable()
+            favorList.fillTable(add.data)
             money.updateUsersList(add.data)
          }
-         this.setMessage(add.success)
+         favorList.setMessage(add.success, add.error || "Операция успешно выполнена")
      })
  }
  favorList.removeUserCallback = function(id){
      ApiConnector.removeUserFromFavorites(id, delUser =>{
         console.log(delUser)
         if(delUser.success == true){
-            rateBoard.clearTable()
-            rateBoard.fillTable(delUser.data)
+            favorList.clearTable()
+            favorList.fillTable(delUser.data)
             money.updateUsersList(delUser.data)
         }
      })
